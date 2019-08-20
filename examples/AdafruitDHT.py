@@ -21,7 +21,7 @@ app.config.update(
 mail = Mail(app)
 def get_temp():
     humidity, temperature = Adafruit_DHT.read_retry(SENSOR, PIN)
-    return round(temperature,1)
+    return round(temperature,1) 
 def get_humid():
     humidity, temperature = Adafruit_DHT.read_retry(SENSOR, PIN)
     return round(humidity,1)
@@ -35,7 +35,7 @@ def send_mail():
 	msg = Message("Send Mail Tutorial!",
 	    sender="blidohuset@gmail.com",
 		recipients=["molin.jakob@gmail.com"])
-	msg.body = "Yo!\n"+ get_temp() + "Have you heard the good word of Python???"           
+	msg.body = "Yo!\n"+ str(get_temp()) + "Have you heard the good word of Python???"           
 	mail.send(msg)
 	return 'Mail sent!'
     
