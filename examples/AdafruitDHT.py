@@ -1,7 +1,7 @@
 from flask import Flask, redirect, url_for, request, abort
 import sys
 app = Flask(__name__)
-SERVER_IP = 192.168.1.4
+SERVER_IP = 85.230.168.142
 import Adafruit_DHT
 import json
 
