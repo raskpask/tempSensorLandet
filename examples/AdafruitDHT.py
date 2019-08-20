@@ -32,10 +32,11 @@ def get_temp_and_humid():
 
 @app.route('/send_mail', methods = ['POST'])
 def send_mail():
+    message = f"Hej!\n Temperaturen i huset är {get_temp()} och Luftfuktigheten är {get_humid()}.\nMVH Huset"
 	msg = Message("Send Mail Tutorial!",
 	    sender="blidohuset@gmail.com",
 		recipients=["molin.jakob@gmail.com"])
-	msg.body = f"Hej!\n Temperaturen i huset är {get_temp()} och Luftfuktigheten är {get_humid()}.\nMVH Huset"           
+	msg.body = message           
 	mail.send(msg)
 	return 'Mail sent!'
     
