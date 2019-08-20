@@ -32,7 +32,7 @@ def get_temp():
        
     return json.dumps({'temp':round(temperature,1), 'humidity':round(humidity,1)})
 
-@app.route('/send-mail')
+@app.route('/send_mail', methods = ['POST'])
 def send_mail():
 	msg = Message("Send Mail Tutorial!",
 	    sender="blidohuset@gmail.com",
