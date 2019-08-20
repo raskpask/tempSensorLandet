@@ -1,6 +1,6 @@
 from flask import Flask, redirect, url_for, request, abort
 from flask_mail import Mail, Message
-import sys, exception
+import sys
 app = Flask(__name__)
 SERVER_IP = '192.168.1.4'
 import Adafruit_DHT
@@ -40,7 +40,7 @@ def send_mail():
 	msg.body = "Yo!\nHave you heard the good word of Python???"           
 	mail.send(msg)
 	return 'Mail sent!'
-    
+
 # Parse command line parameters.
 
 # if len(sys.argv) == 3 and sys.argv[1] in sensor_args:
