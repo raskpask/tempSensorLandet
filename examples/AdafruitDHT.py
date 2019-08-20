@@ -18,7 +18,8 @@ def get_temp():
         print('Temp={0:0.1f}*  Humidity={1:0.1f}%'.format(temperature, humidity))
     else:
         print('Failed to get reading. Try again!')
-    return json.dumps({'temp':temperature, 'humidity':humidity})
+       
+    return json.dumps({'temp':round(temperature,1), 'humidity':round(humidity,1)})
 
 # Parse command line parameters.
 
