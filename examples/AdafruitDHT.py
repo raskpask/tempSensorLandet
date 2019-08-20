@@ -1,10 +1,21 @@
 from flask import Flask, redirect, url_for, request, abort
-import sys
+from flask_mail import Mail, Message
+import sys, exception
 app = Flask(__name__)
 SERVER_IP = '192.168.1.4'
 import Adafruit_DHT
 import json
 
+app.config.update(
+	DEBUG=True,
+	#EMAIL SETTINGS
+	MAIL_SERVER='smtp.gmail.com',
+	MAIL_PORT=465,
+	MAIL_USE_SSL=True,
+	MAIL_USERNAME = 'blidohuset@gmail.com',
+	MAIL_PASSWORD = 'koppen123'
+	)
+mail = Mail(app)
 
 @app.route('/get_temp', methods = ['POST'])
 def get_temp():
@@ -21,6 +32,15 @@ def get_temp():
        
     return json.dumps({'temp':round(temperature,1), 'humidity':round(humidity,1)})
 
+@app.route('/send-mail')
+def send_mail():
+	msg = Message("Send Mail Tutorial!",
+	    sender="blidohuset@gmail.com",
+		recipients=["molin.jakob@email.com"])
+	msg.body = "Yo!\nHave you heard the good word of Python???"           
+	mail.send(msg)
+	return 'Mail sent!'
+    
 # Parse command line parameters.
 
 # if len(sys.argv) == 3 and sys.argv[1] in sensor_args:
