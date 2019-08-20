@@ -35,7 +35,7 @@ def send_mail():
 	msg = Message("Temperatur Blido",
 	    sender="blidohuset@gmail.com",
 		recipients=["molin.jakob@gmail.com"])
-	msg.body = "Hej!\nTemperaturen i huset: "+ str(get_temp()) + " C"+ chr(176)+" grader celsius \nLuftfuktighet: "+ str(get_humid()) + "%\nMVH\nHuset"           
+	msg.body = "Hej!\nTemperaturen i huset: "+ str(get_temp()) + " C"+ chr(176)+" \nLuftfuktighet: "+ str(get_humid()) + "%\nMVH\nHuset"           
 	mail.send(msg)
 	return 'Mail sent!'
     
