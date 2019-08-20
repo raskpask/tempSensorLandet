@@ -1,8 +1,6 @@
 from flask import Flask, redirect, url_for, request, abort
 import sys
-from flask_cors import CORS, cross_origin
 app = Flask(__name__)
-cors = CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 import Adafruit_DHT
 import json
 
