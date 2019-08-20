@@ -43,3 +43,5 @@ def get_temp():
 # else:
 #     print('Failed to get reading. Try again!')
 #     sys.exit(1)
+if __name__ == '__main__':
+   app.run(host = SERVER_IP, debug=False)
