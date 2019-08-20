@@ -8,10 +8,10 @@ import json
 
 @app.route('/get_temp', methods = ['POST'])
 def get_temp():
-    sensor_args = { '11': Adafruit_DHT.DHT11,
-                '22': Adafruit_DHT.DHT22,
-                '2302': Adafruit_DHT.AM2302 }
-    sensor = sensor_args[2302]
+    # sensor_args = { '11': Adafruit_DHT.DHT11,
+    #             '22': Adafruit_DHT.DHT22,
+    #             '2302': Adafruit_DHT.AM2302 }
+    sensor = Adafruit_DHT.AM2302
     pin = 4
     humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
     if humidity is not None and temperature is not None:
