@@ -35,7 +35,7 @@ def send_mail():
 	msg = Message("Send Mail Tutorial!",
 	    sender="blidohuset@gmail.com",
 		recipients=["molin.jakob@gmail.com"])
-	msg.body = "Yo!\nHave you heard the good word of Python???"           
+	msg.body = f"Yo!\nHave you heard the good word of Python???"           
 	mail.send(msg)
 	return 'Mail sent!'
     
