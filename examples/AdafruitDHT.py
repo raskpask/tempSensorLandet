@@ -1,8 +1,10 @@
 from flask import Flask, redirect, url_for, request, abort
 import sys
 app = Flask(__name__)
+SERVER_IP = 192.168.1.4
 import Adafruit_DHT
 import json
+
 
 @app.route('/get_temp', methods = ['POST'])
 def get_temp():
@@ -44,4 +46,4 @@ def get_temp():
 #     print('Failed to get reading. Try again!')
 #     sys.exit(1)
 if __name__ == '__main__':
-   app.run(debug=False)
+   app.run(host = SERVER_IP, debug=False)
