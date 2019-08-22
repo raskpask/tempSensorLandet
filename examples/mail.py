@@ -1,4 +1,4 @@
-import imaplib
+import imaplib, smtplib
 import email
 
 class Mail_Handler:
@@ -11,12 +11,12 @@ class Mail_Handler:
         mail = imaplib.IMAP4_SSL(IMAP)
         mail.login(user, password)
         mail.select("inbox")
-        typ, data = mail.search(None, 'ALL')
+        _, data = mail.search(None, 'ALL')
         ids = data[0] # data is a list.
         id_list = ids.split() # ids is a space separated string
         latest_email_id = id_list[-1] # get the latest
  
-        result, data = mail.fetch(latest_email_id, "(RFC822)") # fetch the email body (RFC822) for the given ID
+        _, data = mail.fetch(latest_email_id, "(RFC822)") # fetch the email body (RFC822) for the given ID
         raw_email = data[0][1].decode('utf-8') 
         email_message = email.message_from_string(raw_email)
         sender = email.utils.parseaddr(email_message['From'])
@@ -31,7 +31,7 @@ class Mail_Handler:
         mail.login(emailaddress, passw)
         mail.select("inbox")
         sender = ''
-        typ, data = mail.search(None, 'ALL')
+        _, data = mail.search(None, 'ALL')
         unseen_messages = len(data[0].split())
         if  unseen_messages > 0:
             print('Getting user')
@@ -42,3 +42,19 @@ class Mail_Handler:
             return sender
         else:
             return 0
+    
+    def send_message(self,recipient,subject,text):
+        FROM = self.emailaddress
+        TO = recipient if isinstance(recipient, list) else [recipient]
+        SUBJECT = subject #'Temperatur i huset'
+        TEXT = text #f"Hej!\nTemperaturen i huset: {temp} Grader Celsius \nLuftfuktighet: {humid}%\nMVH\nHuset"
+        message = """From: %s\nTo: %s\nSubject: %s\n\n%s
+        """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
+        print(message)
+        try:
+            server = smtplib.SMTP_SSL("smtp.gmail.com")
+            server.login(self.emailaddress, self.passw)
+            server.sendmail(FROM, TO, message)
+            server.close()
+        except:
+            print("failed to send mail")
