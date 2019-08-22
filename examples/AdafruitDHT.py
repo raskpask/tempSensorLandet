@@ -6,17 +6,18 @@ import Adafruit_DHT
 SENSOR = Adafruit_DHT.AM2302
 PIN = 4
 mail_handler =Mail_Handler()
+#Settings for the program!
 warning_list = ['molin.jakob@gmail.com']
 warning_temp = 10
-# temp = 15
-# humid =24
+refresh_intervall= 15
+
 
 def get_temp():
-    humidity, temperature = Adafruit_DHT.read_retry(SENSOR, PIN)
+    _, temperature = Adafruit_DHT.read_retry(SENSOR, PIN)
     return round(temperature,1) 
 
 def get_humid():
-    humidity, temperature = Adafruit_DHT.read_retry(SENSOR, PIN)
+    humidity, _ = Adafruit_DHT.read_retry(SENSOR, PIN)
     return round(humidity,1)
 
 def check_new_mails():
@@ -34,4 +35,4 @@ print("The program is running and searching for mails")
 while 1:
     check_new_mails()
     check_temp()
-    time.sleep(15)
+    time.sleep(refresh_intervall)

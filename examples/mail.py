@@ -34,7 +34,6 @@ class Mail_Handler:
         _, data = mail.search(None, 'ALL')
         unseen_messages = len(data[0].split())
         if  unseen_messages > 0:
-            print('Getting user')
             mail.expunge()
             mail.close()
             mail.logout()
@@ -46,8 +45,8 @@ class Mail_Handler:
     def send_message(self,recipient,subject,text):
         FROM = self.emailaddress
         TO = recipient if isinstance(recipient, list) else [recipient]
-        SUBJECT = subject #'Temperatur i huset'
-        TEXT = text #f"Hej!\nTemperaturen i huset: {temp} Grader Celsius \nLuftfuktighet: {humid}%\nMVH\nHuset"
+        SUBJECT = subject 
+        TEXT = text 
         message = """From: %s\nTo: %s\nSubject: %s\n\n%s
         """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
         print(message)
