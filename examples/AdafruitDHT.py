@@ -8,7 +8,7 @@ PIN = 4
 mail_handler =Mail_Handler()
 #Settings for the program!
 warning_list = ['molin.jakob@gmail.com']
-warning_temp = 35
+warning_temp = 10
 
 
 refresh_intervall= 15
