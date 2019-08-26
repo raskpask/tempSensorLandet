@@ -9,8 +9,8 @@ mail_handler =Mail_Handler()
 #Settings for the program!
 warning_list = ['molin.jakob@gmail.com']
 warning_temp = 10
-warning_message= "Hej!\nTemperaturen i huset har sjunkit under "+ warning_temp + " Grader Celsius!\nJust nu: "+ get_temp() + " Grader Celsus!\nMVH\nHuset)"
-info_message = "Hej!\nTemperaturen i huset: " + get_temp() + " Grader Celsius \nLuftfuktighet: " + get_humid() + "%\nMVH\nHuset"
+warning_message= "Hej!\nTemperaturen i huset har sjunkit under "+ str(warning_temp) + " Grader Celsius!\nJust nu: "+ str(get_temp()) + " Grader Celsus!\nMVH\nHuset)"
+info_message = "Hej!\nTemperaturen i huset: " + str(get_temp()) + " Grader Celsius \nLuftfuktighet: " + str(get_humid()) + "%\nMVH\nHuset"
 refresh_intervall= 15
 
 
