@@ -9,6 +9,8 @@ mail_handler =Mail_Handler()
 #Settings for the program!
 warning_list = ['molin.jakob@gmail.com']
 warning_temp = 10
+warning_message= "Hej!\nTemperaturen i huset har sjunkit under "+ warning_temp + " Grader Celsius!\nJust nu: "+ get_temp() + " Grader Celsus!\nMVH\nHuset)"
+info_message = "Hej!\nTemperaturen i huset: " + get_temp() + " Grader Celsius \nLuftfuktighet: " + get_humid() + "%\nMVH\nHuset"
 refresh_intervall= 15
 
 
@@ -23,13 +25,11 @@ def get_humid():
 def check_new_mails():
     sender = mail_handler.check_messages(MAIL_USERNAME,MAIL_PASSWORD)
     if 0 != sender:
-        mail_handler.send_message(sender,'Temperatur i huset',
-        f"Hej!\nTemperaturen i huset: {get_temp()} Grader Celsius \nLuftfuktighet: {get_humid()}%\nMVH\nHuset")
+        mail_handler.send_message(sender,'Temperatur i huset', info_message)
 
 def check_temp():
     if get_temp() < warning_temp:
-        mail_handler.send_message(warning_list,'Temperatur varning',
-        f"Hej!\nTemperaturen i huset har sjunkit under {warning_temp} Grader Celsius!\nJust nu: {get_temp()} Grader Celsus!\nMVH\nHuset")
+        mail_handler.send_message(warning_list,'Temperatur varning', warning_message)
 
 print("The program is running and searching for mails")
 while 1:
