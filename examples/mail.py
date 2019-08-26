@@ -49,7 +49,6 @@ class Mail_Handler:
         TEXT = text 
         message = """From: %s\nTo: %s\nSubject: %s\n\n%s
         """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
-        print(message)
         try:
             server = smtplib.SMTP_SSL("smtp.gmail.com")
             server.login(self.emailaddress, self.passw)
