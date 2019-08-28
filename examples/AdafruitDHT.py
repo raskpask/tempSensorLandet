@@ -24,11 +24,10 @@ def get_humid():
     return round(humidity,1)
 
 def get_command(command):
-    switch = {
-        "Warning off": 1,
-        "Warning on": 0,
-    }
-    WARNING_OFF = switch.get(command,"No command")
+    if command == "Warning off":
+        WARNING_OFF = True
+    elif command == "Warning on":
+        WARNING_OFF = False
 
 def check_new_mails():
     sender, subject = mail_handler.check_messages(MAIL_USERNAME,MAIL_PASSWORD)
@@ -41,7 +40,7 @@ def check_new_mails():
 
 def check_temp():
     if get_temp() < warning_temp:
-        warning_message= "Hej!\nTemperaturen i huset har sjunkit under "+ str(warning_temp) + " Grader Celsius!\nJust nu: "+ str(get_temp()) + " Grader Celsus!\nMVH\nHuset)"
+        warning_message= "Hej!\nTemperaturen i huset har sjunkit under "+ str(warning_temp) + " Grader Celsius!\nJust nu: "+ str(get_temp()) + " Grader Celsus!\nMVH\nHuset"
         mail_handler.send_message(warning_list,'Temperatur varning', warning_message)
         WARNING_OFF = True
         print("Warning was sent")
