@@ -7,7 +7,7 @@ SENSOR = Adafruit_DHT.AM2302
 PIN = 4
 mail_handler =Mail_Handler()
 #Settings for the program!
-WARNING_OFF = False
+global.WARNING_OFF = False
 warning_list = ['molin.jakob@gmail.com']
 warning_temp = 6
 
@@ -24,11 +24,11 @@ def get_humid():
     return round(humidity,1)
 
 def get_command(command):
-    if command == "Warning off":
-        WARNING_OFF = True
+    if command == "Warning off" or 'Warning off':
+        global.WARNING_OFF = True
         print("Warning is now turned off")
     elif command == "Warning on":
-        WARNING_OFF = False
+        global.WARNING_OFF = False
 
 def check_new_mails():
     sender, subject = mail_handler.check_messages(MAIL_USERNAME,MAIL_PASSWORD)
@@ -52,7 +52,7 @@ print("The program is running and searching for mails")
 while 1:
     check_new_mails()
     if check_temp():
-        while WARNING_OFF:
+        while global.WARNING_OFF:
             check_new_mails()
             time.sleep(refresh_intervall)
     time.sleep(refresh_intervall)
