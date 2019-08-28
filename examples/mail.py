@@ -39,7 +39,7 @@ class Mail_Handler:
             mail.logout()
             return self.delete_Unseen_Emails_and_get_user(self.emailaddress, self.passw, self.imapserver)
         else:
-            return 0
+            return 0 , "Error no mail found"
     
     def send_message(self,recipient,subject,text):
         FROM = self.emailaddress
