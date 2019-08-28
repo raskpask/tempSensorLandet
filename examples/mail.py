@@ -25,7 +25,7 @@ class Mail_Handler:
         mail.expunge()
         mail.close()
         mail.logout()
-        return sender[1],subject
+        return {sender[1],subject}
 
     def check_messages(self, emailaddress,passw):
         mail = imaplib.IMAP4_SSL(self.imapserver)

@@ -31,12 +31,12 @@ def get_command(command):
     WARNING_OFF = switch.get(command,"No command")
 
 def check_new_mails():
-    sender, subject = mail_handler.check_messages(MAIL_USERNAME,MAIL_PASSWORD)
-    if 0 != sender: # 0 equals no new messages
-        print(subject)
-        get_command(subject)
+    mail_info = mail_handler.check_messages(MAIL_USERNAME,MAIL_PASSWORD)
+    if 0 != mail_info[0]: # 0 equals no new messages
+        print(mail_info[1])
+        get_command(mail_info[1])
         info_message = "Hej!\nTemperaturen i huset: " + str(get_temp()) + " Grader Celsius \nLuftfuktighet: " + str(get_humid()) + "%\nMVH\nHuset"
-        mail_handler.send_message(sender,'Temperatur i huset', info_message)
+        mail_handler.send_message(mail_info[0],'Temperatur i huset', info_message)
         print("Info mail was sent")
 
 def check_temp():
