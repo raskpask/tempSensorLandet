@@ -26,6 +26,7 @@ def get_humid():
 def get_command(command):
     if command == "Warning off":
         WARNING_OFF = True
+        print("Warning is now turned off")
     elif command == "Warning on":
         WARNING_OFF = False
 
