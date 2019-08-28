@@ -20,25 +20,24 @@ class Mail_Handler:
         raw_email = data[0][1].decode('utf-8') 
         email_message = email.message_from_string(raw_email)
         sender = email.utils.parseaddr(email_message['From'])
+        subject = email_message['Subject']
         mail.store(latest_email_id, '+FLAGS', r'(\Deleted)')
         mail.expunge()
         mail.close()
         mail.logout()
-        return sender[1]
+        return sender[1],subject
 
     def check_messages(self, emailaddress,passw):
         mail = imaplib.IMAP4_SSL(self.imapserver)
         mail.login(emailaddress, passw)
         mail.select("inbox")
-        sender = ''
         _, data = mail.search(None, 'ALL')
         unseen_messages = len(data[0].split())
         if  unseen_messages > 0:
             mail.expunge()
             mail.close()
             mail.logout()
-            sender = self.delete_Unseen_Emails_and_get_user(self.emailaddress, self.passw, self.imapserver)
-            return sender
+            return self.delete_Unseen_Emails_and_get_user(self.emailaddress, self.passw, self.imapserver)
         else:
             return 0
     

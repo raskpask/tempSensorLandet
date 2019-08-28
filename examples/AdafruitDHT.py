@@ -7,8 +7,9 @@ SENSOR = Adafruit_DHT.AM2302
 PIN = 4
 mail_handler =Mail_Handler()
 #Settings for the program!
+WARNING_ON = True
 warning_list = ['molin.jakob@gmail.com']
-warning_temp = 10
+warning_temp = 6
 
 
 refresh_intervall= 15
@@ -22,9 +23,18 @@ def get_humid():
     humidity, _ = Adafruit_DHT.read_retry(SENSOR, PIN)
     return round(humidity,1)
 
+def get_command(command):
+    switch = {
+        "Warning off": WARNING_ON = False,
+        "Warning on": WARNING_ON = True
+    }
+    return switch.get(command,"No command")
+
 def check_new_mails():
-    sender = mail_handler.check_messages(MAIL_USERNAME,MAIL_PASSWORD)
+    sender, subject = mail_handler.check_messages(MAIL_USERNAME,MAIL_PASSWORD)
     if 0 != sender: # 0 equals no new messages
+        print(subject)
+        get_command(subject)
         info_message = "Hej!\nTemperaturen i huset: " + str(get_temp()) + " Grader Celsius \nLuftfuktighet: " + str(get_humid()) + "%\nMVH\nHuset"
         mail_handler.send_message(sender,'Temperatur i huset', info_message)
         print("Info mail was sent")
