@@ -52,7 +52,7 @@ print("The program is running and searching for mails")
 while 1:
     check_new_mails()
     if check_temp():
-        while WARNING == 0:
+        for i in range(0, 900, 1):
             check_new_mails()
             time.sleep(refresh_intervall)
     time.sleep(refresh_intervall)
