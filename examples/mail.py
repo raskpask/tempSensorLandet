@@ -23,6 +23,7 @@ class Mail_Handler:
         sender = email.utils.parseaddr(email_message['From'])
         subject = email_message['Subject']
         body = email_message['Body']
+        print(body)
         mail.store(latest_email_id, '+FLAGS', r'(\Deleted)')
         mail.expunge()
         mail.close()
