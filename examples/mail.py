@@ -23,12 +23,12 @@ class Mail_Handler:
         sender = email.utils.parseaddr(email_message['From'])
         subject = email_message['Subject']
         body = email_message.get_payload()
-        print(body[0])
+        print(body[1])
         mail.store(latest_email_id, '+FLAGS', r'(\Deleted)')
         mail.expunge()
         mail.close()
         mail.logout()
-        return sender[1],subject,body[0]
+        return sender[1],subject,body[1]
 
     def check_messages(self, emailaddress,passw):
         mail = imaplib.IMAP4_SSL(self.imapserver)
