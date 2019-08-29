@@ -22,7 +22,7 @@ class Mail_Handler:
         email_message = email.message_from_string(raw_email)
         sender = email.utils.parseaddr(email_message['From'])
         subject = email_message['Subject']
-        body = email_message['Body']
+        body = email_message.get_payload()
         print(body)
         mail.store(latest_email_id, '+FLAGS', r'(\Deleted)')
         mail.expunge()
