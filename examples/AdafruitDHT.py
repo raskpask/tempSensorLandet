@@ -24,10 +24,10 @@ def get_humid():
     return round(humidity,1)
 
 def get_command(command):
-    if "off" or "Off" in command:
+    if Off" in command:
         warning_handler.warning_off()
         print("Warning is now turned off")
-    elif "on" or "On" in command:
+    elif "On" in command:
         warning_handler.warning_on()
         print("Warning is now turned on")
 def check_new_mails():
