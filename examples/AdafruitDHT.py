@@ -29,6 +29,7 @@ def get_command(command):
         print("Warning is now turned off")
     elif "On" in command:
         warning_handler.warning_on()
+        warning_handler.auto_warning_on()
         print("Warning is now turned on")
 def check_new_mails():
     sender, subject = mail_handler.check_messages(MAIL_USERNAME,MAIL_PASSWORD)
@@ -54,7 +55,7 @@ while 1:
         if check_temp():
             i=0
             while i<delay_warning_message: 
-                if warning_handler.get_maunal_status():
+                if warning_handler.get_auto_status():
                     break
                 check_new_mails()
                 time.sleep(refresh_intervall)
