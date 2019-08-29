@@ -55,7 +55,7 @@ while 1:
         for i in range(0, 900, 1):
             if warning_handler.get_status():
                 break
-            check_new_mails()
-            time.sleep(refresh_intervall)
+        check_new_mails()
+        time.sleep(refresh_intervall)
 check_new_mails()        
 time.sleep(refresh_intervall)
