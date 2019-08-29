@@ -36,13 +36,13 @@ def check_new_mails():
     if 0 != sender: # 0 equals no new messages
         print(subject)
         do_command(subject)
-        info_message = "Hej!\nTemperaturen i huset: " + str(get_temp()) + " Grader Celsius \nLuftfuktighet: " + str(get_humid()) + "%\nMVH\nHuset"
+        info_message = "Hej!\nTemperaturen i huset: " + str(get_temp()) + " Grader Celsius \nLuftfuktighet: " + str(get_humid()) + "%\nKommandon for temperaturvarning: 'On' och 'off'\n\nMVH\nHuset"
         mail_handler.send_message(sender,'Temperatur i huset', info_message)
         print("Info mail was sent")
 
 def check_temp():
     if get_temp() < warning_temp:
-        warning_message= "Hej!\nTemperaturen i huset har sjunkit under "+ str(warning_temp) + " Grader Celsius!\nJust nu: "+ str(get_temp()) + " Grader Celsus!\nIngen ny varning kommer skickas de timmarna som kommer om den inte aktiveras!\n Aktivera genom att svara med 'On' i Amne (Subject)\nMVH\nHuset"
+        warning_message= "Hej!\nTemperaturen i huset har sjunkit under "+ str(warning_temp) + " Grader Celsius.\nJust nu: "+ str(get_temp()) + " Grader Celsus.\nIngen ny varning kommer skickas de timmarna som kommer om den inte aktiveras!\nAktivera genom att svara med 'On' i Amne (Subject).\nMVH\nHuset"
         mail_handler.send_message(warning_list,'Temperatur varning', warning_message)
         print("Warning was sent")
         warning_handler.auto_warning_off()
