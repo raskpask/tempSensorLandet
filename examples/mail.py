@@ -27,7 +27,7 @@ class Mail_Handler:
             for payload in b.get_payload():
                 print(payload.get_payload())
         else:
-            print b.get_payload()
+            print(b.get_payload())
         mail.store(latest_email_id, '+FLAGS', r'(\Deleted)')
         mail.expunge()
         mail.close()
