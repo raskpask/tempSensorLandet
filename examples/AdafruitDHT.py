@@ -57,5 +57,5 @@ while 1:
                 break
             check_new_mails()
             time.sleep(refresh_intervall)
-    check_new_mails()        
-    time.sleep(refresh_intervall)
+check_new_mails()        
+time.sleep(refresh_intervall)
