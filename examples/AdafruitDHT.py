@@ -10,9 +10,8 @@ warning_handler = Warning_handler(True)
 mail_handler =Mail_Handler()
 #Settings for the program!
 warning_list = ['molin.jakob@gmail.com']
-warning_temp = 30
-
-
+warning_temp = 30 #The teperature is has to go below to get a warning
+delay_warning_message= 1200 # 300 loops as aproximately 1 hour 
 refresh_intervall= 10
 
 
@@ -53,7 +52,9 @@ print("The program is running and searching for mails...")
 while 1:
     if check_temp():
         i=0
-        while i<1200: # 300 loops as aproximately 1 hour 
+        while i<delay_warning_message: 
+            if warning_handler.get_status():
+                break
             check_new_mails()
             time.sleep(refresh_intervall)
             i= i+1
