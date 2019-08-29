@@ -7,7 +7,7 @@ class Mail_Handler:
         self.emailaddress = "blidohuset@gmail.com"
         self.passw = "koppen123"
         self.imapserver = "imap.gmail.com"
-        
+
     def delete_Unseen_Emails_and_get_user(self, user, password, IMAP):
         mail = imaplib.IMAP4_SSL(IMAP)
         mail.login(user, password)
@@ -22,11 +22,12 @@ class Mail_Handler:
         email_message = email.message_from_string(raw_email)
         sender = email.utils.parseaddr(email_message['From'])
         subject = email_message['Subject']
+        body = email_message['Body']
         mail.store(latest_email_id, '+FLAGS', r'(\Deleted)')
         mail.expunge()
         mail.close()
         mail.logout()
-        return sender[1],subject
+        return sender[1],subject,body
 
     def check_messages(self, emailaddress,passw):
         mail = imaplib.IMAP4_SSL(self.imapserver)
