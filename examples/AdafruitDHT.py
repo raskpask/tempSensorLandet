@@ -55,7 +55,7 @@ while 1:
         i=0
         while i<900:
             print("Inside loop")
-            if warning_handler.get_status():
+            if not warning_handler.get_status():
                 break
             check_new_mails()
             time.sleep(refresh_intervall)

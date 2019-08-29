@@ -23,7 +23,7 @@ class Mail_Handler:
         sender = email.utils.parseaddr(email_message['From'])
         subject = email_message['Subject']
         # body = email_message.get_payload()
-        if b.is_multipart():
+        if email_message.is_multipart():
             for payload in email_message.get_payload():
                 print(payload.get_payload())
         else:
