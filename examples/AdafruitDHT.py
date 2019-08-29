@@ -24,7 +24,7 @@ def get_humid():
     return round(humidity,1)
 
 def get_command(command):
-    if Off" in command:
+    if "Off" in command:
         warning_handler.warning_off()
         print("Warning is now turned off")
     elif "On" in command:
