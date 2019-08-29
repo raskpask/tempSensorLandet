@@ -32,7 +32,7 @@ def get_command(command):
         warning_handler.warning_on()
 
 def check_new_mails():
-    sender, subject, body, body1, body2 = mail_handler.check_messages(MAIL_USERNAME,MAIL_PASSWORD)
+    sender, subject = mail_handler.check_messages(MAIL_USERNAME,MAIL_PASSWORD)
     if 0 != sender: # 0 equals no new messages
         print(subject)
         print("The body mesage is: "+ body)
