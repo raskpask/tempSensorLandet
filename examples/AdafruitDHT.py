@@ -10,7 +10,7 @@ warning_handler = Warning_handler(True)
 mail_handler =Mail_Handler()
 #Settings for the program!
 warning_list = ['molin.jakob@gmail.com']
-warning_temp = 6
+warning_temp = 30
 
 
 refresh_intervall= 10
@@ -48,7 +48,7 @@ def check_temp():
         return True
     return False
 
-print("The program is running and searching for mails")
+print("The program is running and searching for mails...")
 while 1:
     check_new_mails()
     if check_temp():
