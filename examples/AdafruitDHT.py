@@ -42,9 +42,10 @@ def check_new_mails():
 
 def check_temp():
     if get_temp() < warning_temp:
-        warning_message= "Hej!\nTemperaturen i huset har sjunkit under "+ str(warning_temp) + " Grader Celsius!\nJust nu: "+ str(get_temp()) + " Grader Celsus!\nMVH\nHuset"
+        warning_message= "Hej!\nTemperaturen i huset har sjunkit under "+ str(warning_temp) + " Grader Celsius!\nJust nu: "+ str(get_temp()) + " Grader Celsus!\nIngen ny varning kommer skickas de timmarna som kommer om den inte aktiveras!\nMVH\nHuset"
         mail_handler.send_message(warning_list,'Temperatur varning', warning_message)
         print("Warning was sent")
+        warning_handler.warning_off()
         return True
     return False
 
@@ -55,11 +56,10 @@ while 1:
         i=0
         while i<900:
             print("Inside loop")
-            if not warning_handler.get_status():
-                break
             check_new_mails()
             time.sleep(refresh_intervall)
             i= i+1
         print("Outside loop")
+        warning_handler.warning_on()
     check_new_mails()        
     time.sleep(refresh_intervall)

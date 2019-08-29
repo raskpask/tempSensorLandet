@@ -23,11 +23,11 @@ class Mail_Handler:
         sender = email.utils.parseaddr(email_message['From'])
         subject = email_message['Subject']
         # body = email_message.get_payload()
-        if email_message.is_multipart():
-            for payload in email_message.get_payload():
-                print(payload.get_payload())
-        else:
-            print(email_message.get_payload())
+        # if email_message.is_multipart():
+        #     for payload in email_message.get_payload():
+        #         print(payload.get_payload())
+        # else:
+        #     print(email_message.get_payload())
         mail.store(latest_email_id, '+FLAGS', r'(\Deleted)')
         mail.expunge()
         mail.close()
