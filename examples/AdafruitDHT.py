@@ -44,20 +44,21 @@ def check_temp():
         warning_message= "Hej!\nTemperaturen i huset har sjunkit under "+ str(warning_temp) + " Grader Celsius!\nJust nu: "+ str(get_temp()) + " Grader Celsus!\nIngen ny varning kommer skickas de timmarna som kommer om den inte aktiveras!\nMVH\nHuset"
         mail_handler.send_message(warning_list,'Temperatur varning', warning_message)
         print("Warning was sent")
-        warning_handler.warning_off()
+        warning_handler.auto_warning_off
         return True
     return False
 
 print("The program is running and searching for mails...")
 while 1:
-    if check_temp():
-        i=0
-        while i<delay_warning_message: 
-            if warning_handler.get_status():
-                break
-            check_new_mails()
-            time.sleep(refresh_intervall)
-            i= i+1
-        warning_handler.warning_on()
+    if warning_handler.get_maunal_status() and warning_handler.get_auto_status():
+        if check_temp():
+            i=0
+            while i<delay_warning_message: 
+                if warning_handler.get_maunal_status():
+                    break
+                check_new_mails()
+                time.sleep(refresh_intervall)
+                i= i+1
+            warning_handler.auto_warning_on()
     check_new_mails()        
     time.sleep(refresh_intervall)
