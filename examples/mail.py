@@ -7,6 +7,7 @@ class Mail_Handler:
         self.emailaddress = "blidohuset@gmail.com"
         self.passw = "koppen123"
         self.imapserver = "imap.gmail.com"
+        
     def delete_Unseen_Emails_and_get_user(self, user, password, IMAP):
         mail = imaplib.IMAP4_SSL(IMAP)
         mail.login(user, password)
