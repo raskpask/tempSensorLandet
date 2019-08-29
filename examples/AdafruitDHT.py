@@ -35,7 +35,6 @@ def check_new_mails():
     sender, subject = mail_handler.check_messages(MAIL_USERNAME,MAIL_PASSWORD)
     if 0 != sender: # 0 equals no new messages
         print(subject)
-        print("The body mesage is: "+ body)
         get_command(subject)
         info_message = "Hej!\nTemperaturen i huset: " + str(get_temp()) + " Grader Celsius \nLuftfuktighet: " + str(get_humid()) + "%\nMVH\nHuset"
         mail_handler.send_message(sender,'Temperatur i huset', info_message)
@@ -55,7 +54,7 @@ while 1:
         for i in range(0, 900, 1):
             if warning_handler.get_status():
                 break
-        check_new_mails()
-        time.sleep(refresh_intervall)
-check_new_mails()        
-time.sleep(refresh_intervall)
+            check_new_mails()
+            time.sleep(refresh_intervall)
+    check_new_mails()        
+    time.sleep(refresh_intervall)
