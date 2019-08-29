@@ -1,13 +1,14 @@
+#True means that the warning will be turned on
 class Warning_handler:
     
     def __init__(self, status):
-        self.warning_on = status
+        self.warning = status
 
     def warning_on(self):
-        self.warning_on = True
+        self.warning = True
     
     def warning_off(self):
-        self.warning_on = False
+        self.warning = False
     
     def get_status(self):
-        return self.warning_on
+        return self.warning
