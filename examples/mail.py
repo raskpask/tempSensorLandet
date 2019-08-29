@@ -24,10 +24,10 @@ class Mail_Handler:
         subject = email_message['Subject']
         # body = email_message.get_payload()
         if b.is_multipart():
-            for payload in b.get_payload():
+            for payload in email_message.get_payload():
                 print(payload.get_payload())
         else:
-            print(b.get_payload())
+            print(email_message.get_payload())
         mail.store(latest_email_id, '+FLAGS', r'(\Deleted)')
         mail.expunge()
         mail.close()

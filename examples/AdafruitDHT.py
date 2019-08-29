@@ -52,12 +52,14 @@ print("The program is running and searching for mails...")
 while 1:
     if check_temp():
         print("Inside if")
-        for i in range(0, 900, 1):
+        i=0
+        while i<900:
             print("Inside loop")
             if warning_handler.get_status():
                 break
             check_new_mails()
             time.sleep(refresh_intervall)
+            i= i+1
         print("Outside loop")
     check_new_mails()        
     time.sleep(refresh_intervall)
