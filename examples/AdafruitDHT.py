@@ -23,11 +23,11 @@ def get_humid():
     humidity, _ = Adafruit_DHT.read_retry(SENSOR, PIN)
     return round(humidity,1)
 
-def get_command(command):
-    if "Off" in command:
+def do_command(command):
+    if "Off" in command or "off" in command:
         warning_handler.warning_off()
         print("Warning is now turned off")
-    elif "On" in command:
+    elif "On" in command or "on" in command:
         warning_handler.warning_on()
         warning_handler.auto_warning_on()
         print("Warning is now turned on")
@@ -35,14 +35,14 @@ def check_new_mails():
     sender, subject = mail_handler.check_messages(MAIL_USERNAME,MAIL_PASSWORD)
     if 0 != sender: # 0 equals no new messages
         print(subject)
-        get_command(subject)
+        do_command(subject)
         info_message = "Hej!\nTemperaturen i huset: " + str(get_temp()) + " Grader Celsius \nLuftfuktighet: " + str(get_humid()) + "%\nMVH\nHuset"
         mail_handler.send_message(sender,'Temperatur i huset', info_message)
         print("Info mail was sent")
 
 def check_temp():
     if get_temp() < warning_temp:
-        warning_message= "Hej!\nTemperaturen i huset har sjunkit under "+ str(warning_temp) + " Grader Celsius!\nJust nu: "+ str(get_temp()) + " Grader Celsus!\nIngen ny varning kommer skickas de timmarna som kommer om den inte aktiveras!\nMVH\nHuset"
+        warning_message= "Hej!\nTemperaturen i huset har sjunkit under "+ str(warning_temp) + " Grader Celsius!\nJust nu: "+ str(get_temp()) + " Grader Celsus!\nIngen ny varning kommer skickas de timmarna som kommer om den inte aktiveras!\n Aktivera genom att svara med 'On' i Ämne\nMVH\nHuset"
         mail_handler.send_message(warning_list,'Temperatur varning', warning_message)
         print("Warning was sent")
         warning_handler.auto_warning_off()
