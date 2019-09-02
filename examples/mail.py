@@ -36,18 +36,18 @@ class Mail_Handler:
         try:
             mail = imaplib.IMAP4_SSL(self.imapserver)
             mail.login(emailaddress, passw)
-            mail.select("inbox")
-            _, data = mail.search(None, 'ALL')
-            unseen_messages = len(data[0].split())
-        except ConnectionError as e:
-            print(e)
-            if  unseen_messages > 0:
-                mail.expunge()
-                mail.close()
-                mail.logout()
-                return self.delete_Unseen_Emails_and_get_user(self.emailaddress, self.passw, self.imapserver)
-            else:
-                return 0 , "Error no mail found"
+        except:
+            print("Connecton error has occurred")
+        mail.select("inbox")
+        _, data = mail.search(None, 'ALL')
+        unseen_messages = len(data[0].split())
+        if  unseen_messages > 0:
+            mail.expunge()
+            mail.close()
+            mail.logout()
+            return self.delete_Unseen_Emails_and_get_user(self.emailaddress, self.passw, self.imapserver)
+        else:
+            return 0 , "Error no mail found"
 
 
     def send_message(self,recipient,subject,text):
