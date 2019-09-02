@@ -44,6 +44,7 @@ class Mail_Handler:
                 return 0 , "Error no mail found"
         except:
             print("Error connecting to the mail server. Try again later")
+            OnError(self)
             
     def send_message(self,recipient,subject,text):
         FROM = self.emailaddress
