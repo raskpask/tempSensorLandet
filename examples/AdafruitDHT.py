@@ -50,15 +50,18 @@ def check_temp():
 
 print("The program is running and searching for mails...")
 while 1:
-    if warning_handler.get_maunal_status() and warning_handler.get_auto_status():
-        if check_temp():
-            i=0
-            while i<delay_warning_message: 
-                if warning_handler.get_auto_status():
-                    break
-                check_new_mails()
-                time.sleep(refresh_intervall)
-                i= i+1
-            warning_handler.auto_warning_on()
-    check_new_mails()        
-    time.sleep(refresh_intervall)
+    try:
+        if warning_handler.get_maunal_status() and warning_handler.get_auto_status():
+            if check_temp():
+                i=0
+                while i<delay_warning_message: 
+                    if warning_handler.get_auto_status():
+                        break
+                    check_new_mails()
+                    time.sleep(refresh_intervall)
+                    i= i+1
+                warning_handler.auto_warning_on()
+        check_new_mails()        
+        time.sleep(refresh_intervall)
+    except ConnectionError:
+        continue

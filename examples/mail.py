@@ -29,23 +29,19 @@ class Mail_Handler:
         return sender[1],subject
 
     def check_messages(self, emailaddress,passw):
-        try:
-            mail = imaplib.IMAP4_SSL(self.imapserver)
-            mail.login(emailaddress, passw)
-            mail.select("inbox")
-            _, data = mail.search(None, 'ALL')
-            unseen_messages = len(data[0].split())
-            if  unseen_messages > 0:
-                mail.expunge()
-                mail.close()
-                mail.logout()
-                return self.delete_Unseen_Emails_and_get_user(self.emailaddress, self.passw, self.imapserver)
-            else:
-                return 0 , "Error no mail found"
-        except:
-            print("Error connecting to the mail server. Try again later")
-            OnError(self)
-            
+        mail = imaplib.IMAP4_SSL(self.imapserver)
+        mail.login(emailaddress, passw)
+        mail.select("inbox")
+        _, data = mail.search(None, 'ALL')
+        unseen_messages = len(data[0].split())
+        if  unseen_messages > 0:
+            mail.expunge()
+            mail.close()
+            mail.logout()
+            return self.delete_Unseen_Emails_and_get_user(self.emailaddress, self.passw, self.imapserver)
+        else:
+            return 0 , "Error no mail found"
+    
     def send_message(self,recipient,subject,text):
         FROM = self.emailaddress
         TO = recipient if isinstance(recipient, list) else [recipient]
