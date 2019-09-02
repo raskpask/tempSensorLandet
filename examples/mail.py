@@ -39,6 +39,8 @@ class Mail_Handler:
             mail.select("inbox")
             _, data = mail.search(None, 'ALL')
             unseen_messages = len(data[0].split())
+        except ConnectionError as e:
+            print(e)
             if  unseen_messages > 0:
                 mail.expunge()
                 mail.close()
@@ -46,8 +48,7 @@ class Mail_Handler:
                 return self.delete_Unseen_Emails_and_get_user(self.emailaddress, self.passw, self.imapserver)
             else:
                 return 0 , "Error no mail found"
-        except ConnectionError as e:
-            print(e)
+
 
     def send_message(self,recipient,subject,text):
         FROM = self.emailaddress
