@@ -1,5 +1,6 @@
 from mail import Mail_Handler
 from warning import Warning_handler
+from requests.exceptions import ConnectionError
 import sys, time
 MAIL_USERNAME = 'blidohuset@gmail.com'
 MAIL_PASSWORD = 'koppen123'
@@ -63,5 +64,5 @@ while 1:
                 warning_handler.auto_warning_on()
         check_new_mails()        
         time.sleep(refresh_intervall)
-    except ConnectionError:
-        continue
+    except ConnectionError as e:
+        print(e)
