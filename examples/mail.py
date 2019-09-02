@@ -38,6 +38,7 @@ class Mail_Handler:
             mail.login(emailaddress, passw)
         except:
             print("Connecton error has occurred")
+            return 0, "No connection"
         mail.select("inbox")
         _, data = mail.search(None, 'ALL')
         unseen_messages = len(data[0].split())
