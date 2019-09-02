@@ -13,23 +13,22 @@ class Mail_Handler:
         try:
             mail = imaplib.IMAP4_SSL(IMAP)
             mail.login(user, password)
-            mail.select("inbox")
-            _, data = mail.search(None, 'ALL')
-            ids = data[0] # data is a list.
-            id_list = ids.split() # ids is a space separated string
-            latest_email_id = id_list[-1] # get the latest
- 
-            _, data = mail.fetch(latest_email_id, "(RFC822)") # fetch the email body (RFC822) for the given ID
-            raw_email = data[0][1].decode('utf-8') 
-            email_message = email.message_from_string(raw_email)
-            sender = email.utils.parseaddr(email_message['From'])
-            subject = email_message['Subject']
-            mail.store(latest_email_id, '+FLAGS', r'(\Deleted)')
-            mail.expunge()
-            mail.close()
-            mail.logout()
-        except ConnectionError as e:
-            print(e)    
+        except:
+            print("Connection error")
+        mail.select("inbox")
+        _, data = mail.search(None, 'ALL')
+        ids = data[0] # data is a list.
+        id_list = ids.split() # ids is a space separated string
+        latest_email_id = id_list[-1] # get the latest
+        _, data = mail.fetch(latest_email_id, "(RFC822)") # fetch the email body (RFC822) for the given ID
+        raw_email = data[0][1].decode('utf-8') 
+        email_message = email.message_from_string(raw_email)
+        sender = email.utils.parseaddr(email_message['From'])
+        subject = email_message['Subject']
+        mail.store(latest_email_id, '+FLAGS', r'(\Deleted)')
+        mail.expunge()
+        mail.close()
+        mail.logout()    
             return sender[1],subject
 
     def check_messages(self, emailaddress,passw):
@@ -37,7 +36,7 @@ class Mail_Handler:
             mail = imaplib.IMAP4_SSL(self.imapserver)
             mail.login(emailaddress, passw)
         except:
-            print("Connecton error has occurred")
+            print("Connecton error has occurred, will try to connect next time.")
             return 0, "No connection"
         mail.select("inbox")
         _, data = mail.search(None, 'ALL')
