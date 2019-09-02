@@ -22,12 +22,6 @@ class Mail_Handler:
         email_message = email.message_from_string(raw_email)
         sender = email.utils.parseaddr(email_message['From'])
         subject = email_message['Subject']
-        # body = email_message.get_payload()
-        # if email_message.is_multipart():
-        #     for payload in email_message.get_payload():
-        #         print(payload.get_payload())
-        # else:
-        #     print(email_message.get_payload())
         mail.store(latest_email_id, '+FLAGS', r'(\Deleted)')
         mail.expunge()
         mail.close()
@@ -35,19 +29,22 @@ class Mail_Handler:
         return sender[1],subject
 
     def check_messages(self, emailaddress,passw):
-        mail = imaplib.IMAP4_SSL(self.imapserver)
-        mail.login(emailaddress, passw)
-        mail.select("inbox")
-        _, data = mail.search(None, 'ALL')
-        unseen_messages = len(data[0].split())
-        if  unseen_messages > 0:
-            mail.expunge()
-            mail.close()
-            mail.logout()
-            return self.delete_Unseen_Emails_and_get_user(self.emailaddress, self.passw, self.imapserver)
-        else:
-            return 0 , "Error no mail found"
-    
+        try:
+            mail = imaplib.IMAP4_SSL(self.imapserver)
+            mail.login(emailaddress, passw)
+            mail.select("inbox")
+            _, data = mail.search(None, 'ALL')
+            unseen_messages = len(data[0].split())
+            if  unseen_messages > 0:
+                mail.expunge()
+                mail.close()
+                mail.logout()
+                return self.delete_Unseen_Emails_and_get_user(self.emailaddress, self.passw, self.imapserver)
+            else:
+                return 0 , "Error no mail found"
+        except:
+            print("Error connecting to the mail server. Try again later")
+            
     def send_message(self,recipient,subject,text):
         FROM = self.emailaddress
         TO = recipient if isinstance(recipient, list) else [recipient]

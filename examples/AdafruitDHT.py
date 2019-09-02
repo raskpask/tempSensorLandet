@@ -10,8 +10,8 @@ warning_handler = Warning_handler(True)
 mail_handler =Mail_Handler()
 #Settings for the program!
 warning_list = ['molin.jakob@gmail.com']
-warning_temp = 30 #The teperature is has to go below to get a warning
-delay_warning_message= 1200 # 300 loops as aproximately 1 hour 
+warning_temp = 7 #The teperature is has to go below to get a warning
+delay_warning_message= 900 # 300 loops as aproximately 1 hour 
 refresh_intervall= 10
 
 
@@ -34,7 +34,6 @@ def do_command(command):
 def check_new_mails():
     sender, subject = mail_handler.check_messages(MAIL_USERNAME,MAIL_PASSWORD)
     if 0 != sender: # 0 equals no new messages
-        print(subject)
         do_command(subject)
         info_message = "Hej!\nTemperaturen i huset: " + str(get_temp()) + " Grader Celsius \nLuftfuktighet: " + str(get_humid()) + "%\nKommandon for temperaturvarning: 'On' och 'off'\n\nMVH\nHuset"
         mail_handler.send_message(sender,'Temperatur i huset', info_message)
