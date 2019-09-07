@@ -11,7 +11,7 @@ warning_handler = Warning_handler(True)
 mail_handler =Mail_Handler()
 #Settings for the program!
 warning_list = ['molin.jakob@gmail.com','fredrikmolin65@gmail.com']
-warning_temp = 30 #The teperature is has to go below to get a warning
+warning_temp = 6 #The teperature is has to go below to get a warning
 delay_warning_message= 900 # 300 loops as aproximately 1 hour 
 refresh_intervall= 10
 
