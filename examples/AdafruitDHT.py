@@ -18,15 +18,11 @@ refresh_intervall= 10
 
 def get_temp():
     _, temperature = Adafruit_DHT.read_retry(SENSOR, PIN)
-    if type(temperature) == float:
-        return round(temperature,1)
-    return temperature
+    return round(temperature,1) 
 
 def get_humid():
     humidity, _ = Adafruit_DHT.read_retry(SENSOR, PIN)
-    if type(humidity) == float:
-        return round(humidity,1)
-    return humidity
+    return round(humidity,1)
 
 def do_command(command):
     if "Off" in command or "off" in command:
