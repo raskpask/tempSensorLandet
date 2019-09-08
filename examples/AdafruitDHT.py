@@ -18,11 +18,14 @@ refresh_intervall= 10
 
 def get_temp():
     _, temperature = Adafruit_DHT.read_retry(SENSOR, PIN)
-    return round(temperature,1) 
-
+    if type(temperature) == float:
+        return round(temperature,1) 
+    return "Sensor error"
 def get_humid():
     humidity, _ = Adafruit_DHT.read_retry(SENSOR, PIN)
-    return round(humidity,1)
+    if type(humidity) == float:
+        return round(humidity,1)
+    return "Sensor error"
 
 def do_command(command):
     if "Off" in command or "off" in command:
@@ -42,6 +45,7 @@ def check_new_mails():
 
 def check_temp():
     if get_temp() < warning_temp:
+
         warning_message= "Hej!\nTemperaturen i huset har sjunkit under "+ str(warning_temp) + " Grader Celsius.\nJust nu: "+ str(get_temp()) + " Grader Celsus.\nIngen ny varning kommer skickas de timmarna som kommer om den inte aktiveras!\nAktivera genom att svara med 'On' i Amne (Subject).\nMVH\nHuset"
         mail_handler.send_message(warning_list,'Temperatur varning', warning_message)
         print("Warning was sent")
