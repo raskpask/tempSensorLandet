@@ -53,6 +53,7 @@ def check_temp():
         return True
     return False
 
+time.sleep(15)
 print("The program is running and searching for mails...")
 while 1:
     try:
