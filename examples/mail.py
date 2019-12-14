@@ -13,7 +13,8 @@ class Mail_Handler:
         try:
             mail = imaplib.IMAP4_SSL(IMAP)
             mail.login(user, password)
-        except:
+        except imaplib.IMAP4.error:
+            
             print("Connection error")
         try:
             mail.select("inbox")
@@ -38,7 +39,7 @@ class Mail_Handler:
         try:
             mail = imaplib.IMAP4_SSL(self.imapserver)
             mail.login(emailaddress, passw)
-        except:
+        except imaplib.IMAP4.error:
             print("Connecton error has occurred, will try to connect next time.")
             return 0, "No connection"
         mail.select("inbox")

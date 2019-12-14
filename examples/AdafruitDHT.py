@@ -45,7 +45,6 @@ def check_new_mails():
 
 def check_temp():
     if get_temp() < warning_temp:
-
         warning_message= "Hej!\nTemperaturen i huset har sjunkit under "+ str(warning_temp) + " Grader Celsius.\nJust nu: "+ str(get_temp()) + " Grader Celsus.\nIngen ny varning kommer skickas de timmarna som kommer om den inte aktiveras!\nAktivera genom att svara med 'On' i Amne (Subject).\nMVH\nHuset"
         mail_handler.send_message(warning_list,'Temperatur varning', warning_message)
         print("Warning was sent")
