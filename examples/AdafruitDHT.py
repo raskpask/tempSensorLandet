@@ -1,6 +1,7 @@
 from mail import Mail_Handler
 from warning import Warning_handler
 from requests.exceptions import ConnectionError
+from messenger import MessengerHandler
 import sys, time
 MAIL_USERNAME = 'blidohuset@gmail.com'
 MAIL_PASSWORD = 'koppen123'
@@ -14,6 +15,9 @@ warning_list = ['molin.jakob@gmail.com','fredrikmolin65@gmail.com']
 warning_temp = 6 #The teperature is has to go below to get a warning
 delay_warning_message= 900 # 300 loops as aproximately 1 hour 
 refresh_intervall= 10
+messengerAPI = MessengerHandler()
+userIDs = messengerAPI.getUsers()
+
 
 
 def get_temp():
@@ -36,12 +40,13 @@ def do_command(command):
         warning_handler.auto_warning_on()
         print("Warning is now turned on")
 def check_new_mails():
-    sender, subject = mail_handler.check_messages(MAIL_USERNAME,MAIL_PASSWORD)
-    if 0 != sender: # 0 equals no new messages
-        do_command(subject)
-        info_message = "Hej!\nTemperaturen i huset: " + str(get_temp()) + " Grader Celsius \nLuftfuktighet: " + str(get_humid()) + "%\nKommandon for temperaturvarning: 'On' och 'off'\n\nMVH\nHuset"
-        mail_handler.send_message(sender,'Temperatur i huset', info_message)
-        print("Info mail was sent")
+    messengerAPI.fetchMessage(userIDs)
+    # sender, subject = mail_handler.check_messages(MAIL_USERNAME,MAIL_PASSWORD)
+    # if 0 != sender: # 0 equals no new messages
+    #     do_command(subject)
+    #     info_message = "Hej!\nTemperaturen i huset: " + str(get_temp()) + " Grader Celsius \nLuftfuktighet: " + str(get_humid()) + "%\nKommandon for temperaturvarning: 'On' och 'off'\n\nMVH\nHuset"
+    #     mail_handler.send_message(sender,'Temperatur i huset', info_message)
+    #     print("Info mail was sent")
 
 def check_temp():
     if get_temp() < warning_temp:
@@ -56,16 +61,16 @@ time.sleep(15)
 print("The program is running and searching for mails...")
 while 1:
     try:
-        if warning_handler.get_maunal_status() and warning_handler.get_auto_status():
-            if check_temp():
-                i=0
-                while i<delay_warning_message: 
-                    if warning_handler.get_auto_status():
-                        break
-                    check_new_mails()
-                    time.sleep(refresh_intervall)
-                    i= i+1
-                warning_handler.auto_warning_on()
+        # if warning_handler.get_maunal_status() and warning_handler.get_auto_status():
+        #     if check_temp():
+        #         i=0
+        #         while i<delay_warning_message: 
+        #             if warning_handler.get_auto_status():
+        #                 break
+        #             check_new_mails()
+        #             time.sleep(refresh_intervall)
+        #             i= i+1
+        #         warning_handler.auto_warning_on()
         check_new_mails()        
         time.sleep(refresh_intervall)
     except ConnectionError as e:
