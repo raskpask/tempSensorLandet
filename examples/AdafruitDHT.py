@@ -1,7 +1,7 @@
 from mail import Mail_Handler
 from warning import Warning_handler
 from requests.exceptions import ConnectionError
-from messenger import MessengerHandler
+from messengerAPI import MessengerHandler
 import sys, time
 MAIL_USERNAME = 'blidohuset@gmail.com'
 MAIL_PASSWORD = 'koppen123'
