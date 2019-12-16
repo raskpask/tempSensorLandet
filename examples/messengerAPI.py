@@ -35,8 +35,9 @@ class MessengerHandler():
                     'info': "sendInfo",
                     'restart': "restartDevice",
                     'warningON': "warningON",
-                    'warningOFF': "warningOFF"
-                    # Could send start functions instead like 'off': off
+                    'warningOFF': "warningOFF",
+                    # Could send start functions instead like 'off': off,
+                    'none': "doNothing"
                 }
                 print(command.get(message.text))
 
