@@ -45,7 +45,7 @@ class Main:
 
     def warningON(self, userID):
         self.warningHandler.warningOn()
-        self.messengerAPI.sendMessage(userID, "Varningar ar nu paslagna!\nDu kommer fa en varning om temperatruen sjunker under+" +str(warningTemp)+"grader celcius.\nFor att stanga av det skriv 'off'")
+        self.messengerAPI.sendMessage(userID, "Varningar ar nu paslagna!\nDu kommer fa en varning om temperatruen sjunker under " +str(warningTemp)+"grader celcius.\nFor att stanga av det skriv 'off'")
 
     def warningOff(self, userID):
         self.warningHandler.warningOff()
@@ -66,6 +66,7 @@ class Main:
 
         print("The program is running and searching for messages...")
         while 1:
+            try:
                 if (self.warningHandler.getMaunalStatus):
                     if self.checkTemp():
                         i = 0
@@ -78,6 +79,9 @@ class Main:
                         self.warningHandler.autoWarningOn()
                 self.checkNewMails()
                 time.sleep(refreshIntervall)
+            except ConnectionError as e:
+                print(e)
+                time.sleep(60)
         # time.sleep(15)
 
 
