@@ -46,15 +46,15 @@ class Main:
 
     def warningON(self, userID):
         self.warningHandler.warningOn()
-        self.messengerAPI.sendMessage(userID, "Varningar är nu påslagna!\n" +
-                                      f"Du kommer få en varning om temperatruen sjunker under {warningTemp} grader celcius.\n" +
-                                      "För att stänga av det skriv 'off'")
+        self.messengerAPI.sendMessage(userID, "Varningar ar nu paslagna!\n" +
+                                      f"Du kommer fa en varning om temperatruen sjunker under {warningTemp} grader celcius.\n" +
+                                      "For att stanga av det skriv 'off'")
 
     def warningOff(self, userID):
         self.warningHandler.warningOff()
-        self.messengerAPI.sendMessage(userID, f"Varningar är nu avstängda!\n" +
-                                      f"Du kommer INTE få en varning om temperatruen sjunker under {warningTemp} grader celcius.\n" +
-                                      "För att sätta på varnignar skriv 'on'")
+        self.messengerAPI.sendMessage(userID, f"Varningar ar nu avstangda!\n" +
+                                      f"Du kommer INTE fa en varning om temperatruen sjunker under {warningTemp} grader celcius.\n" +
+                                      "For att satta pa varnignar skriv 'on'")
 
     def checkNewMails(self):
         self.messengerAPI.fetchMessage(self, self.userIDs)
@@ -68,7 +68,7 @@ class Main:
                                                   "Temperaturen i huset har sjunkit under " + str(warningTemp) + " Grader Celsius.\n" +
                                                   "Just nu: " + str(self.getTemp()) + " Grader Celsus.\n" +
                                                   "Ingen ny varning kommer skickas de timmarna som kommer om den inte aktiveras!\n" +
-                                                  "För att kontrollera temp skriv 'info'.\n" +
+                                                  "For att kontrollera temp skriv 'info'.\n" +
                                                   "MVH\n" +
                                                   "Huset")
             except Error as e:
