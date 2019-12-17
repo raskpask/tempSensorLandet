@@ -56,12 +56,9 @@ class Main:
 
     def checkTemp(self):
         if self.getTemp() < warningTemp:
-            try:
                 for userID in self.userIDs:
 
                     self.messengerAPI.sendMessage(userID, "Hej!\nTemperaturen i huset har sjunkit under " + str(warningTemp) + " Grader Celsius.\nJust nu: " + str(self.getTemp()) + " Grader Celsus.\nIngen ny varning kommer skickas de timmarna som kommer om den inte aktiveras!\nFor att kontrollera temp skriv 'info'.\nMVH\nHuset")
-            except Error as e:
-                print(e)
             self.warningHandler.autoWarningOff()
             return True
         return False
@@ -70,7 +67,6 @@ class Main:
 
         print("The program is running and searching for messages...")
         while 1:
-            try:
                 if (self.warningHandler.getMaunalStatus):
                     if self.checkTemp():
                         i = 0
@@ -83,8 +79,6 @@ class Main:
                         self.warningHandler.autoWarningOn()
                 self.checkNewMails()
                 time.sleep(refreshIntervall)
-            except Error as e:
-                print(e)
         # time.sleep(15)
 
 
