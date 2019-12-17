@@ -45,11 +45,11 @@ class Main:
 
     def warningON(self, userID):
         self.warningHandler.warningOn()
-        self.messengerAPI.sendMessage(userID, "Varningar ar nu paslagna!\nDu kommer fa en varning om temperatruen sjunker under+" +warningTemp+"grader celcius.\nFor att stanga av det skriv 'off'")
+        self.messengerAPI.sendMessage(userID, "Varningar ar nu paslagna!\nDu kommer fa en varning om temperatruen sjunker under+" +str(warningTemp)+"grader celcius.\nFor att stanga av det skriv 'off'")
 
     def warningOff(self, userID):
         self.warningHandler.warningOff()
-        self.messengerAPI.sendMessage(userID, "Varningar ar nu avstangda!\nDu kommer INTE fa en varning om temperatruen sjunker under"+ warningTemp +"grader celcius.\nFor att satta pa varnignar skriv 'on'")
+        self.messengerAPI.sendMessage(userID, "Varningar ar nu avstangda!\nDu kommer INTE fa en varning om temperatruen sjunker under"+ str(warningTemp) +"grader celcius.\nFor att satta pa varnignar skriv 'on'")
 
     def checkNewMails(self):
         self.messengerAPI.fetchMessage(self, self.userIDs)
