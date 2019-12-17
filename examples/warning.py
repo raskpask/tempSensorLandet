@@ -1,21 +1,24 @@
 #True means that the warning will be turned on
-class Warning_handler:
+class WarningHandler:
     
     def __init__(self, status):
         self.warning = status
-        self.auto_warning = status
+        self.autoWarning = status
 
-    def warning_on(self):
+    def warningOn(self):
         self.warning = True
-    def auto_warning_on(self):
-        self.auto_warning=True
 
-    def warning_off(self):
+    def autoWarningOn(self):
+        self.autoWarning=True
+
+    def warningOff(self):
         self.warning = False
-    def auto_warning_off(self):
-        self.auto_warning=False
 
-    def get_maunal_status(self):
+    def autoWarningOff(self):
+        self.autoWarning=False
+
+    def getMaunalStatus(self):
         return self.warning
-    def get_auto_status(self):
-        return self.auto_warning
+
+    def getAutoStatus(self):
+        return self.autoWarning

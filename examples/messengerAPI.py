@@ -27,25 +27,26 @@ class MessengerHandler():
         for userID in userIDs:
             self.sendMessage(userID,warningMessage)
 
-    def fetchMessage(self,userIDs):
+    def fetchMessage(self,main,userIDs):
         for userID in userIDs:
             messages = self.client.fetchThreadMessages(thread_id=userID, limit=1)
             for message in messages:
-                command ={
-                    'info': "sendInfo",
-                    'restart': "restartDevice",
-                    'warningON': "warningON",
-                    'warningOFF': "warningOFF",
-                    # Could send start functions instead like 'off': off,
-                    'none': "doNothing"
-                }
-                print(command.get(message.text))
+                message.text= message.text.lower()
+                if (message.text == 'info'):
+                    main.sendInfo(userID)
+                elif (message.text == 'restart'):
+                    print('restart')
+                elif (message.text == 'on'):
+                    main.warningON(userID)
+                elif (message.text == 'off'):
+                    main.warningOff(userID)
+
 
 
         
-msgH = MessengerHandler()
-userIDs = msgH.getUsers()
-# msgH.sendWarning(userIDs,"The temp is too low")
-msgH.fetchMessage(userIDs)
-msgH.logout()
+# msgH = MessengerHandler()
+# userIDs = msgH.getUsers()
+# # msgH.sendWarning(userIDs,"The temp is too low")
+# msgH.fetchMessage(userIDs)
+# msgH.logout()
 
