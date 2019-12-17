@@ -35,7 +35,7 @@ class MessengerHandler():
                 if (message.text == 'info'):
                     main.sendInfo(userID)
                 elif (message.text == 'restart'):
-                    print('restart')
+                    main.restartDevice()
                 elif (message.text == 'on'):
                     main.warningON(userID)
                 elif (message.text == 'off'):

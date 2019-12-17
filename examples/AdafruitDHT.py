@@ -7,6 +7,8 @@ from mail import Mail_Handler
 from warning import WarningHandler
 from requests.exceptions import ConnectionError
 from messengerAPI import MessengerHandler
+from subprocess import Popen, PIPE
+
 import sys
 import time
 MAIL_USERNAME = 'blidohuset@gmail.com'
@@ -50,6 +52,11 @@ class Main:
     def warningOff(self, userID):
         self.warningHandler.warningOff()
         self.messengerAPI.sendMessage(userID, "Varningar ar nu avstangda!\nDu kommer INTE fa en varning om temperatruen sjunker under"+ str(warningTemp) +"grader celcius.\nFor att satta pa varnignar skriv 'on'")
+
+    def restartDevice(self):
+        reboot_statement = "sudo shutdown -r -f now"
+        popen_args = reboot_statement.split(" ")
+        Popen(popen_args, stdout=PIPE, stderr=PIPE)
 
     def checkNewMails(self):
         self.messengerAPI.fetchMessage(self, self.userIDs)
