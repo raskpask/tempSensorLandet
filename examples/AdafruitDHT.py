@@ -56,9 +56,8 @@ class Main:
 
     def checkTemp(self):
         if self.getTemp() < warningTemp:
-                for userID in self.userIDs:
-
-                    self.messengerAPI.sendMessage(userID, "Hej!\nTemperaturen i huset har sjunkit under " + str(warningTemp) + " Grader Celsius.\nJust nu: " + str(self.getTemp()) + " Grader Celsus.\nIngen ny varning kommer skickas de timmarna som kommer om den inte aktiveras!\nFor att kontrollera temp skriv 'info'.\nMVH\nHuset")
+            for userID in self.userIDs:
+                self.messengerAPI.sendMessage(userID, "Hej!\nTemperaturen i huset har sjunkit under " + str(warningTemp) + " Grader Celsius.\nJust nu: " + str(self.getTemp()) + " Grader Celsus.\nIngen ny varning kommer skickas de timmarna som kommer om den inte aktiveras!\nFor att kontrollera temp skriv 'info'.\nMVH\nHuset")
             self.warningHandler.autoWarningOff()
             return True
         return False
