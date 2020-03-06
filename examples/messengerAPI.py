@@ -3,7 +3,6 @@ from fbchat import Client
 from fbchat.models import *
 
 
-
 class MessengerHandler():
     def __init__(self):  
         self.client = Client("blidohuset@gmail.com", "koppen123")
@@ -23,23 +22,18 @@ class MessengerHandler():
             userIDs.append(user.uid)
         return userIDs    
     
-    def sendWarning(self,userIDs,warningMessage):
-        for userID in userIDs:
-            self.sendMessage(userID,warningMessage)
+    # def sendWarning(self,userIDs,warningMessage):
+    #     for userID in userIDs:
+    #         self.sendMessage(userID,warningMessage)
 
-    def fetchMessage(self,main,userIDs):
+    def fetchMessage(self,sendInfo,userIDs):
         for userID in userIDs:
             messages = self.client.fetchThreadMessages(thread_id=userID, limit=1)
             for message in messages:
                 message.text= message.text.lower()
                 if (message.text == 'info'):
-                    main.sendInfo(userID)
-                elif (message.text == 'restart'):
-                    main.restartDevice()
-                elif (message.text == 'on'):
-                    main.warningON(userID)
-                elif (message.text == 'off'):
-                    main.warningOff(userID)
+                    sendInfo(userID)
+
 
 
 
