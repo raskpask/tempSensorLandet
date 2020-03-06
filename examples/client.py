@@ -26,7 +26,6 @@ class Main:
         return "Sensor error"
 
     def run(self):
-
         print("The program is running sending temp updates every 30 mins...")
         while 1:
             try:
@@ -39,6 +38,5 @@ class Main:
             except ConnectionError as e:
                 print(e)
                 time.sleep(360)
-
 
 main = Main()

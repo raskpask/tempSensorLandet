@@ -21,10 +21,6 @@ class MessengerHandler():
         for user in self.users:
             userIDs.append(user.uid)
         return userIDs    
-    
-    # def sendWarning(self,userIDs,warningMessage):
-    #     for userID in userIDs:
-    #         self.sendMessage(userID,warningMessage)
 
     def fetchMessage(self,sendInfo,userIDs):
         for userID in userIDs:
@@ -33,14 +29,3 @@ class MessengerHandler():
                 message.text= message.text.lower()
                 if (message.text == 'info'):
                     sendInfo(userID)
-
-
-
-
-        
-# msgH = MessengerHandler()
-# userIDs = msgH.getUsers()
-# # msgH.sendWarning(userIDs,"The temp is too low")
-# msgH.fetchMessage(userIDs)
-# msgH.logout()
-

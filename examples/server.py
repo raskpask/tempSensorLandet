@@ -6,6 +6,7 @@ app = Flask(__name__)
 sensorTemp = 20
 sensorHumid = 50
 warningTemp = 6
+SERVER_IP = 'localhost'
 messengerAPI = MessengerHandler()
 userIDs = messengerAPI.getUsers()
 
@@ -36,5 +37,5 @@ def fetch():
 
 if __name__ == '__main__':
     fetch()
-    app.run(host = 'localhost', debug=False)
+    app.run(host = SERVER_IP, debug=False)
 
