@@ -6,7 +6,7 @@ app = Flask(__name__)
 sensorTemp = 20
 sensorHumid = 50
 warningTemp = 6
-SERVER_IP = '83.209.111.80'
+SERVER_IP = 83.209.111.80
 messengerAPI = MessengerHandler()
 userIDs = messengerAPI.getUsers()
 
