@@ -5,7 +5,7 @@ from fbchat.models import *
 
 class MessengerHandler():
     def __init__(self):  
-        self.client = Client("blidohuset@gmail.com", "koppen123")
+        self.client = Client("blidohuset@gmail.com", "bl!dohuset")
         print("Own id: {}".format(self.client.uid))
 
     def sendMessage(self,userID,message):
