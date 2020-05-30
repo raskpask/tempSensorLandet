@@ -1,6 +1,6 @@
-# imports for raspberry
-# import Adafruit_DHT
-# SENSOR = Adafruit_DHT.AM2302
+imports for raspberry
+import Adafruit_DHT
+SENSOR = Adafruit_DHT.AM2302
 PIN = 4
 
 import requests
