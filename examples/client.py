@@ -15,14 +15,14 @@ class Main:
         # return '25'
         _, temperature = Adafruit_DHT.read_retry(SENSOR, PIN)
         if type(temperature) == float:
-            return str(round(temperature, 1))
+            return int(temperature, 1)
         return "Sensor error"
 
     def getHumidity(self):
         # return '60'
         humidity, _ = Adafruit_DHT.read_retry(SENSOR, PIN)
         if type(humidity) == float:
-            return str(round(humidity, 1))
+            return int(humidity, 1)
         return "Sensor error"
 
     def run(self):
@@ -30,8 +30,8 @@ class Main:
         while 1:
             try:
                 data = {
-                    'temp':self.getTemp(), 
-                    'humid':self.getHumidity() 
+                    'temp':str(self.getTemp()), 
+                    'humid':str(self.getHumidity()) 
                 }
                 requests.post(url = API_ENDPOINT, data = data)
                 time.sleep(1800) 
