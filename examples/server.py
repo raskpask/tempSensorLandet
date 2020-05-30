@@ -24,14 +24,14 @@ def setTemp():
     except:
         abort(500)
 
-def sendInfo(userID):
-    messengerAPI = MessengerHandler()
-    messengerAPI.sendMessage(userID, f"Hej!\nTemperaturen i huset är {sensorTemp} och luftfuktigheten är {sensorHumid}\nMvh\nHuset")
+# def sendInfo(userID):
+#     messengerAPI = MessengerHandler()
+#     messengerAPI.sendMessage(userID, f"Hej!\nTemperaturen i huset är {sensorTemp} och luftfuktigheten är {sensorHumid}\nMvh\nHuset")
 
 def fetch():
     threading.Timer(5.0, fetch).start()
     try:
-      messengerAPI.fetchMessage(sendInfo,userIDs)
+      messengerAPI.fetchMessage(sensorTemp,sensorHumid,userIDs)
     except:
         print("Error")
 

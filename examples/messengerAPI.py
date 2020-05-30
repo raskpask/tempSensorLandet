@@ -22,10 +22,10 @@ class MessengerHandler():
             userIDs.append(user.uid)
         return userIDs    
 
-    def fetchMessage(self,sendInfo,userIDs):
+    def fetchMessage(self,sensorTemp,sensorHumid,userIDs):
         for userID in userIDs:
             messages = self.client.fetchThreadMessages(thread_id=userID, limit=1)
             for message in messages:
                 message.text= message.text.lower()
                 if (message.text == 'info'):
-                    sendInfo(userID)
+                    self.sendMessage(userID, f"Hej!\nTemperaturen i huset är {sensorTemp} och luftfuktigheten är {sensorHumid}\nMvh\nHuset")
