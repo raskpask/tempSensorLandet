@@ -15,14 +15,14 @@ class Main:
         # return '25'
         _, temperature = Adafruit_DHT.read_retry(SENSOR, PIN)
         if type(temperature) == float:
-            return int(temperature, 1)
+            return int(temperature)
         return "Sensor error"
 
     def getHumidity(self):
         # return '60'
         humidity, _ = Adafruit_DHT.read_retry(SENSOR, PIN)
         if type(humidity) == float:
-            return int(humidity, 1)
+            return int(humidity)
         return "Sensor error"
 
     def run(self):
