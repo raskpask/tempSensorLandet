@@ -20,7 +20,7 @@ def setTemp():
         if warningTemp > values.getTemp():
             for userID in userIDs:
                 messengerAPI.sendMessage(userID, f"Hej!\nTemperaturen i huset har sjunkit under {warningTemp} Grader Celsius.\nJust nu: {values.getTemp()} Grader Celsus.\nFor att kontrollera temp skriv 'info'.\nMVH\nHuset")
-        values.setTime(datetime.now())
+        values.setTime(datetime.datetime.now())
         return 'Done'
     except:
         abort(500)

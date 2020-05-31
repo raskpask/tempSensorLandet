@@ -33,8 +33,8 @@ class Main:
                     'temp':str(self.getTemp()), 
                     'humid':str(self.getHumidity()) 
                 }
-                print(data) 
                 requests.post(url = API_ENDPOINT, data = data)
+                print(data)
                 time.sleep(1800)
             except ConnectionError as e:
                 print(e)

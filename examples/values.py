@@ -3,7 +3,7 @@ import datetime
 class Values():
     temp = 0
     humid = 0
-    datetime = datetime.fromtimestamp(0)
+    datetime = datetime.datetime(2020,1,1)
     def __init__(self):
         self.temp = 20
         self.humid = 50
