@@ -5,7 +5,7 @@ PIN = 4
 
 import requests
 import time
-API_ENDPOINT = "http://83.209.111.80:5000/setTemp"
+API_ENDPOINT = "http://83.209.246.44//setTemp"
 
 class Main:
     def __init__(self):
@@ -36,7 +36,7 @@ class Main:
                 requests.post(url = API_ENDPOINT, data = data)
                 print(data)
                 time.sleep(1800)
-            except ConnectionError as e:
+            except EnvironmentError as e:
                 print(e)
                 time.sleep(360)
 

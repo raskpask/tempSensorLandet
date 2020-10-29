@@ -26,8 +26,8 @@ let data = [
 console.log(data)
 console.log(tempData.default)
 return ( 
-  <div>
-    <LineChart min={0} max={100} width="1024px" height="800px" data={tempData.default} />
+  <div className= "chart">
+    <LineChart min={0} max={100} width="400px" height="600px" data={tempData.default} />
   </div>
 );
 }

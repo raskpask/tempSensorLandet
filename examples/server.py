@@ -17,7 +17,7 @@ def setTemp():
     try:
         f = open("./../frontend/src/data/tempData.json", "r")
         data = json.load(f)
-        write = "[\n" + json.dumps(data[0]).split('}')[0] + ', "' + datetime.today().strftime('%Y-%m-%d') + '" : '+ int(request.form['temp']) + "}}" + ",\n" + json.dumps(data[1]).split('}')[0] + ', "' + datetime.today().strftime('%Y-%m-%d') + '" : ' + int(request.form['humid']) + "}}" + "\n]"
+        write = "[\n" + json.dumps(data[0]).split('}')[0] + ', "' + datetime.today().strftime('%Y-%m-%d:%H%M') + '" : '+ request.form['temp'] + "}}" + ",\n" + json.dumps(data[1]).split('}')[0] + ', "' + datetime.today().strftime('%Y-%m-%d:%H%M') + '" : ' + request.form['humid'] + "}}" + "\n]"
         originalStdout = sys.stdout
         f = open("./../frontend/src/data/tempData.json", "w")
         sys.stdout = f
