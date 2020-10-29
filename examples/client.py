@@ -5,7 +5,7 @@ PIN = 4
 
 import requests
 import time
-API_ENDPOINT = "http://83.209.246.44/setTemp"
+API_ENDPOINT = "http://83.209.246.44:5000/setTemp"
 
 class Main:
     def __init__(self):
