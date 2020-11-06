@@ -33,9 +33,7 @@ class Main:
                     'temp':str(self.getTemp()), 
                     'humid':str(self.getHumidity()) 
                 }
-                print(requests.post(url = API_ENDPOINT, data = data))
-                r = requests.post(url = API_ENDPOINT, data = data)
-                print(r.status_code)
+                requests.post(url = API_ENDPOINT, data = data)
                 print(data)
                 time.sleep(1800)
             except EnvironmentError as e:

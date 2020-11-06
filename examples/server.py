@@ -1,5 +1,5 @@
 from flask import Flask,request,abort
-from messengerAPI import MessengerHandler
+from mail import Mail_Handler
 from values import Values
 from datetime import datetime
 import json
@@ -8,29 +8,25 @@ import threading
 app = Flask(__name__)
 SERVER_IP = '192.168.1.15'
 values = Values()
-# messengerAPI = MessengerHandler()
-# userIDs = messengerAPI.getUsers()
-warningTemp = 6
+mailClient = Mail_Handler()
+
+warningTemp = 40
 
 @app.route('/setTemp',methods = ['POST'])
 def setTemp():
     try:
-        f = open("./../frontend/src/data/tempData.json", "r")
-        data = json.load(f)
-        write = "[\n" + json.dumps(data[0]).split('}')[0] + ', "' + datetime.today().strftime('%Y-%m-%d:%H%M') + '" : '+ request.form['temp'] + "}}" + ",\n" + json.dumps(data[1]).split('}')[0] + ', "' + datetime.today().strftime('%Y-%m-%d:%H%M') + '" : ' + request.form['humid'] + "}}" + "\n]"
-        originalStdout = sys.stdout
-        f = open("./../frontend/src/data/tempData.json", "w")
-        sys.stdout = f
-        print(write)
-        sys.stdout = originalStdout
-        f.close()
-        # messengerAPI = MessengerHandler()
-        # values.setTemp(int(request.form['temp']))
-        # values.setHumid(int(request.form['humid']))
-        # if warningTemp > values.getTemp():
-        #     for userID in userIDs:
-        #         messengerAPI.sendMessage(userID, f"Hej!\nTemperaturen i huset har sjunkit under {warningTemp} Grader Celsius.\nJust nu: {values.getTemp()} Grader Celsus.\nFor att kontrollera temp skriv 'info'.\nMVH\nHuset")
-        # values.setTime(datetime.datetime.now())
+        if (request.form['temp'] != 'Sensor error' or 'Sensor error' != request.form['humid']):
+            f = open("./../frontend/src/data/tempData.json", "r")
+            data = json.load(f)
+            write = "[\n" + json.dumps(data[0]).split('}')[0] + ', "' + datetime.today().strftime('%Y-%m-%d:%H%M') + '" : '+ request.form['temp'] + "}}" + ",\n" + json.dumps(data[1]).split('}')[0] + ', "' + datetime.today().strftime('%Y-%m-%d:%H%M') + '" : ' + request.form['humid'] + "}}" + "\n]"
+            originalStdout = sys.stdout
+            f = open("./../frontend/src/data/tempData.json", "w")
+            sys.stdout = f
+            print(write)
+            sys.stdout = originalStdout
+            f.close()
+        if warningTemp > values.getTemp():
+            mailClient.send_message("molin.jakob@gmail.com","Temp varning på blido", f"Temperaturen är under {warningTemp} grader.")
         return 'Done'
     except:
         abort(500)
